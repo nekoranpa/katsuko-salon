@@ -29,7 +29,7 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
 
         <div className="hero-grid">
           <section className="hero-copy">
-            <p className="eyebrow">YABIKU KATSUKO BIWAON SALON</p>
+            <p className="eyebrow">PRIVATE WARM BEAUTY SALON</p>
             <h1>温めることで、<br />めぐり、美しく。</h1>
             <p className="lead">
               勝子 美和温サロンは、温熱ケアを中心に、心身をゆるめながら美容と健康維持をサポートするプライベートサロンです。
@@ -42,10 +42,12 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
           </section>
 
           <aside className="hero-side" aria-label="勝子 美和温サロン コンセプト">
-            <div className="side-title">
-              <p>PRIVATE WARM BEAUTY SALON</p>
-              <h2>勝子 美和温サロン</h2>
-              <span>YABIKU KATSUKO BIWAON SALON</span>
+            <div className="logo-card">
+              <img
+                className="hero-logo"
+                src="/katsuko-logo.png"
+                alt="勝子 美和温サロン YABIKU KATSUKO BIWAON SALON"
+              />
             </div>
             <div className="word-list">
               <div><b>温</b><span>やさしく温める</span></div>

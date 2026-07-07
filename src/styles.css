@@ -115,6 +115,20 @@ h1 {
   box-shadow: var(--shadow);
   backdrop-filter: blur(4px);
 }
+.logo-card {
+  border-radius: 28px;
+  padding: 22px;
+  background: linear-gradient(160deg, #fffdf9, #fbf3e6);
+  border: 1px solid rgba(199,154,73,.28);
+  box-shadow: 0 10px 30px rgba(116,69,47,.08);
+  text-align: center;
+}
+.hero-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
 .side-title {
   border-radius: 28px;
   padding: 38px 26px 34px;
