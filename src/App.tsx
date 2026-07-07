@@ -15,9 +15,9 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
     <main className="site">
       <header className="hero" id="top">
         <nav className="nav">
-          <a className="nav-brand" href="#top" aria-label="KATSUKO 温美華 トップへ">
-            <span>KATSUKO 温美華</span>
-            <small>温熱ビューティーサロン</small>
+          <a className="brand text-brand" href="#top" aria-label="勝子 美和温サロン トップへ">
+            <span className="brand-main">勝子 美和温サロン</span>
+            <span className="brand-sub">YABIKU KATSUKO BIWAON SALON</span>
           </a>
           <div className="nav-links">
             <a href="#concept">コンセプト</a>
@@ -29,13 +29,10 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
 
         <div className="hero-grid">
           <section className="hero-copy">
-            <div className="brand-banner" aria-label="KATSUKO 温美華 ロゴ">
-              <img src="/katsuko-onbika-logo-transparent.png" alt="KATSUKO 温美華" />
-            </div>
-            <p className="eyebrow">PRIVATE WARM BEAUTY SALON</p>
-            <h1>温める、整える。<br />静かに華やぐ美しさへ。</h1>
+            <p className="eyebrow">YABIKU KATSUKO BIWAON SALON</p>
+            <h1>温めることで、<br />めぐり、美しく。</h1>
             <p className="lead">
-              KATSUKO 温美華は、温熱ケアを中心に、心身をゆるめながら美容と健康維持をサポートするプライベートサロンです。
+              勝子 美和温サロンは、温熱ケアを中心に、心身をゆるめながら美容と健康維持をサポートするプライベートサロンです。
             </p>
             <div className="actions">
               <a className="primary" href={`tel:${salonPhone}`}>電話で予約する</a>
@@ -44,12 +41,12 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
             <p className="note">施術予約はお電話で承ります。Web予約フォームは現在公開していません。</p>
           </section>
 
-          <aside className="hero-side" aria-label="KATSUKO 温美華 コンセプト">
-            <p className="side-label">Concept</p>
-            <h2>温・美・華</h2>
-            <p className="side-text">
-              強く飾るのではなく、やさしく温め、静かに整え、自然な華やぎへ導く時間を大切にします。
-            </p>
+          <aside className="hero-side" aria-label="勝子 美和温サロン コンセプト">
+            <div className="side-title">
+              <p>PRIVATE WARM BEAUTY SALON</p>
+              <h2>勝子 美和温サロン</h2>
+              <span>YABIKU KATSUKO BIWAON SALON</span>
+            </div>
             <div className="word-list">
               <div><b>温</b><span>やさしく温める</span></div>
               <div><b>美</b><span>自然な美しさを支える</span></div>
@@ -62,8 +59,8 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
       <section className="concept" id="concept">
         <div className="section-title center">
           <p>Concept</p>
-          <h2>温もりでゆるみ、美しさが自然に華ひらく。</h2>
-          <span>急がせるのではなく、やさしく温め、整え、年齢に応じた自然な美しさを支える時間を大切にします。</span>
+          <h2>美和温の時間で、内側から静かに整える。</h2>
+          <span>強い変化を急がせるのではなく、やさしく温め、めぐりを意識し、年齢に応じた自然な美しさを支える時間を大切にします。</span>
         </div>
         <div className="concept-grid">
           <article><b>温</b><h3>温熱ケア</h3><p>体をやさしく温め、リラックスしやすい時間をつくります。</p></article>
@@ -100,7 +97,7 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
         <div className="section-title">
           <p>Online shop</p>
           <h2>オンラインショップ</h2>
-          <span>カツコオリジナル商品の販売準備中です。公開後、Stripe決済リンクで購入できるようにします。</span>
+          <span>勝子 美和温サロンのオリジナル商品の販売準備中です。公開後、Stripe決済リンクで購入できるようにします。</span>
         </div>
         {publicProducts.length === 0 ? (
           <div className="shop-empty">
