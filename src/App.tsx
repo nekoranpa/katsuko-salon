@@ -48,6 +48,8 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
                 src="/katsuko-logo.png"
                 alt="勝子 美和温サロン YABIKU KATSUKO BIWAON SALON"
               />
+              <p className="logo-catch">温めて、めぐらせて、私を整える。</p>
+              <span className="logo-catch-sub">温熱ケア中心のプライベートサロン</span>
             </div>
             <div className="word-list">
               <div><b>温</b><span>やさしく温める</span></div>

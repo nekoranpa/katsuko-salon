@@ -129,6 +129,20 @@ h1 {
   height: auto;
   mix-blend-mode: multiply;
 }
+.logo-catch {
+  margin: 6px 0 4px;
+  font-size: clamp(15px, 1.6vw, 19px);
+  letter-spacing: .08em;
+  color: #4a342a;
+  font-weight: 500;
+}
+.logo-catch-sub {
+  display: block;
+  font-size: 12px;
+  letter-spacing: .16em;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
 .side-title {
   border-radius: 28px;
   padding: 38px 26px 34px;
