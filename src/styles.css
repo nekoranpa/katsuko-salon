@@ -184,10 +184,49 @@ h1 {
   font-size: 22px; font-weight: 500;
 }
 .word-list span { color: #5f493e; font-size: 15px; }
-.concept, .menu-section, .shop-section { padding: 84px clamp(20px, 5vw, 76px); }
+.concept, .menu-section, .shop-section, .staff-section { padding: 84px clamp(20px, 5vw, 76px); }
 .concept { background: #fffaf4; }
 .menu-section { background: #f7ece2; }
 .shop-section { background: #fffaf4; }
+.staff-section { background: #f7ece2; }
+
+/* 施術師紹介 */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 1120px;
+  margin: 38px auto 0;
+}
+.staff-card {
+  background: var(--paper, #fff);
+  border: 1px solid rgba(116, 69, 47, .13);
+  border-radius: 24px;
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(116, 69, 47, .06);
+}
+.staff-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 14px;
+  display: block;
+  border: 3px solid var(--gold, #c9a24b);
+}
+.staff-photo-empty {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #74452f, #d3a07b);
+  color: #fffaf4;
+  font-size: 40px;
+}
+.staff-card h3 { margin: 0 0 6px; font-size: 22px; }
+.staff-specialty { margin: 0 0 8px; color: var(--gold, #b08a3c); font-size: 14px; letter-spacing: .04em; }
+.staff-bio { margin: 0 0 8px; color: #675043; font-size: 14px; line-height: 1.7; }
+.staff-hours { margin: 0; color: #8a6c5b; font-size: 13px; }
+.product-photo { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border-radius: 24px; }
 .section-title { max-width: 760px; margin-bottom: 30px; }
 .section-title.center { text-align: center; margin-left: auto; margin-right: auto; }
 .section-title h2 { margin: 0 0 10px; font-size: clamp(28px, 3.8vw, 48px); line-height: 1.28; font-weight: 500; }

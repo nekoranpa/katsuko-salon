@@ -1,12 +1,23 @@
+import { useEffect, useState } from 'react'
 import { Package, Phone, Sparkles } from 'lucide-react'
-import { products as demoProducts, serviceMenus as demoMenus } from './mockData'
+import { serviceMenus as demoMenus } from './mockData'
 import type { Product, ServiceMenu } from './types'
+import { supabase } from './supabase'
 import './styles.css'
 
 const yen = new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'JPY' })
 const salonPhone = import.meta.env.VITE_SALON_PHONE || '090-0000-0000'
 
-function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Product[] }) {
+type Therapist = {
+  id: string
+  name: string
+  specialty: string | null
+  work_hours: string | null
+  bio: string | null
+  photo_url: string | null
+}
+
+function PublicSite({ menus, products, therapists }: { menus: ServiceMenu[]; products: Product[]; therapists: Therapist[] }) {
   const visibleMenus = menus.filter((menu) => menu.is_active)
   const publicProducts = products.filter((product) => product.is_public)
   const phoneLabel = salonPhone === '090-0000-0000' ? '電話番号準備中' : salonPhone
@@ -22,6 +33,7 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
           <div className="nav-links">
             <a href="#concept">コンセプト</a>
             <a href="#menu">施術内容</a>
+            {therapists.length > 0 && <a href="#staff">施術師</a>}
             <a href="#shop">ショップ</a>
             <a className="nav-button" href={`tel:${salonPhone}`}>電話予約</a>
           </div>
@@ -97,11 +109,36 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
         </div>
       </section>
 
+      {therapists.length > 0 && (
+        <section className="staff-section" id="staff">
+          <div className="section-title center">
+            <p>Therapist</p>
+            <h2>施術師のご紹介</h2>
+            <span>あなたの時間を担当するスタッフです。</span>
+          </div>
+          <div className="staff-grid">
+            {therapists.map((t) => (
+              <article className="staff-card" key={t.id}>
+                {t.photo_url ? (
+                  <img className="staff-photo" src={t.photo_url} alt={t.name} />
+                ) : (
+                  <div className="staff-photo staff-photo-empty">温</div>
+                )}
+                <h3>{t.name}</h3>
+                {t.specialty && <p className="staff-specialty">{t.specialty}</p>}
+                {t.bio && <p className="staff-bio">{t.bio}</p>}
+                {t.work_hours && <p className="staff-hours">担当：{t.work_hours}</p>}
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section className="shop-section" id="shop">
         <div className="section-title">
           <p>Online shop</p>
           <h2>オンラインショップ</h2>
-          <span>勝子 美和温サロンのオリジナル商品の販売準備中です。公開後、Stripe決済リンクで購入できるようにします。</span>
+          <span>勝子 美和温サロンのオリジナル商品です。ボタンから安全にご購入いただけます。</span>
         </div>
         {publicProducts.length === 0 ? (
           <div className="shop-empty">
@@ -113,12 +150,20 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
           <div className="product-grid">
             {publicProducts.map((product) => (
               <article className="product-card" key={product.id}>
-                <div className="product-image">温</div>
+                {product.image_url ? (
+                  <img className="product-photo" src={product.image_url} alt={product.name} />
+                ) : (
+                  <div className="product-image">温</div>
+                )}
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <div className="product-footer">
                   <strong>{yen.format(product.price)}</strong>
-                  {product.stripe_payment_link ? <a className="mini" href={product.stripe_payment_link}>購入する</a> : <button className="mini muted" disabled>準備中</button>}
+                  {product.stripe_payment_link ? (
+                    <a className="mini" href={product.stripe_payment_link} target="_blank" rel="noreferrer">購入する</a>
+                  ) : (
+                    <button className="mini muted" disabled>準備中</button>
+                  )}
                 </div>
               </article>
             ))}
@@ -139,5 +184,28 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
 }
 
 export default function App() {
-  return <PublicSite menus={demoMenus} products={demoProducts.filter(() => false)} />
+  const [menus, setMenus] = useState<ServiceMenu[]>(demoMenus)
+  const [products, setProducts] = useState<Product[]>([])
+  const [therapists, setTherapists] = useState<Therapist[]>([])
+
+  useEffect(() => {
+    if (!supabase) return
+    ;(async () => {
+      const [m, p, t] = await Promise.all([
+        supabase.from('service_menus').select('*').eq('is_active', true).order('price'),
+        supabase.from('products').select('*').eq('is_public', true).order('price'),
+        supabase
+          .from('profiles')
+          .select('id,name,specialty,work_hours,bio,photo_url')
+          .eq('role', 'therapist')
+          .eq('is_public', true)
+          .order('name'),
+      ])
+      if (m.data && m.data.length > 0) setMenus(m.data as ServiceMenu[])
+      setProducts((p.data ?? []) as Product[])
+      setTherapists((t.data ?? []) as Therapist[])
+    })()
+  }, [])
+
+  return <PublicSite menus={menus} products={products} therapists={therapists} />
 }
