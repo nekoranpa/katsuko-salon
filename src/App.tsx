@@ -1,5 +1,4 @@
 import { Package, Phone, Sparkles } from 'lucide-react'
-import AdminApp from './AdminApp'
 import { products as demoProducts, serviceMenus as demoMenus } from './mockData'
 import type { Product, ServiceMenu } from './types'
 import './styles.css'
@@ -136,9 +135,5 @@ function PublicSite({ menus, products }: { menus: ServiceMenu[]; products: Produ
 }
 
 export default function App() {
-  if (window.location.pathname.startsWith('/admin')) {
-    return <AdminApp />
-  }
-
   return <PublicSite menus={demoMenus} products={demoProducts.filter(() => false)} />
 }
